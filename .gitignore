@@ -4,7 +4,7 @@
 .vscode
 
 # Environment variables
-.env.local
+.env*
 
 # Playwright
 node_modules/
