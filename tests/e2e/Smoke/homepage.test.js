@@ -1,33 +1,48 @@
 // @ts-check
 
 import {test, expect } from '@playwright/test'; 
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
+import { HomePage } from '../../page-objects/homepage-objects';
+
+// This is an over complication to demonstrate how we can use the test.step function to organize and document the sections of the test code. 
+// In this demonstration, each actions are wrapped in a test.step class making it easier to understand the flow and outcome of a "complex test suite".
+// This also helps with the readability of the test report.
+
 
 test.describe('Smoke Test',
-    //{tag: '@smoke'}, 
-    () => {
+    {tag: '@smoke'}, () => {
 
-    // Move this to a helper function
-    test.beforeAll(() => {
-        const envPath = path.resolve(__dirname, '.env');
-        if(fs.existsSync(envPath)) {
-            dotenv.config({ path: envPath });
-            console.log('.env file loaded successfully.');
-        } else {
-            console.warn('.env file not found!');
-        }
+    /** @type {HomePage} */
+    let homePage; 
+
+    test.beforeEach(async ({page}) => {
+        homePage = new HomePage(page);
+        await homePage.goto();
     });
 
-    test('Initial Test', async ({page}) => {
+    test('Check for correct page title', {
+        annotation: [
+            { type: 'Description', description: 'Checks that we are redirected to the correct landing page by comparing the page title and url to the expected values.' }
+        ]} ,async () => {
 
-        const baseUrl = process.env.BASE_URL;
+        /** @type {string} */
+        let pageTitle;
+        /** @type {string} */
+        let expectedPageTitle;
 
-        // just adding a comment
+        test.step('Get the current page title', async () => {
+            pageTitle = await homePage.getPageTitle();
+            console.log(`Getting the current Page Title...${pageTitle}`);
+        });
 
-        console.log(baseUrl);
-        await page.goto('/');
+        test.step('Get the expected page title', async () => {
+            expectedPageTitle = await homePage.getExpectedPageTitle();
+            console.log(`Getting the expected Page Title...${expectedPageTitle}`);
+        });
+
+        test.step('Compare the current and expected values', async () => {
+            expect(pageTitle).toBe(expectedPageTitle);
+        });
+
     })
 
 })
