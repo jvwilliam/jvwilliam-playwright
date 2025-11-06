@@ -24,6 +24,8 @@ test.describe('Smoke Test',
 
         const baseUrl = process.env.BASE_URL;
 
+        // just adding a comment
+
         console.log(baseUrl);
         await page.goto('/');
     })
