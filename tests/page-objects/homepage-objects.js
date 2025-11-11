@@ -1,4 +1,6 @@
 import { expect } from '@playwright/test';
+import { getPath } from '../utils/pathHelper';
+import fs from 'fs';
 
 export class HomePage { 
     /**
@@ -18,7 +20,7 @@ export class HomePage {
         }
     }
 
-    getNavigationElements() {
+    getNavigationElementsIds() {
         return {
             aboutSectionNavigation: this.page.getByTestId('nav-about'),
             servicesSectionNavigation: this.page.getByTestId('nav-services'),
@@ -28,7 +30,7 @@ export class HomePage {
         }
     }
 
-    getMainSection() {
+    getMainSectionIds() {
         return {
             aboutSection: this.page.getByTestId('section-about'),
             servicesSection: this.page.getByTestId('section-services'),
@@ -38,7 +40,7 @@ export class HomePage {
         }
     }
 
-    getSectionHeadings() {
+    getSectionHeadingsIds() {
         return {
             aboutSectionHeading: this.page.getByTestId('section-about-heading'),
             serviceSectionHeading: this.page.getByTestId('section-services-heading'),
@@ -47,6 +49,14 @@ export class HomePage {
             trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading')
         }
     }
+
+    getExpectedValues() {
+        const dataPath = getPath('expected-values.json');
+        const rawData = fs.readFileSync(dataPath, 'utf-8');
+        const data = JSON.parse(rawData)
+
+        return data;
+    };
 
     async goto() {
         await this.page.goto('/');

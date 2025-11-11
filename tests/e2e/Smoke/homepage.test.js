@@ -56,7 +56,7 @@ test.describe('Homepage Smoke Test',
                 experienceSection,
                 skillsSection,
                 trainingsSection
-            } = homePage.getMainSection();
+            } = homePage.getMainSectionIds();
 
             const {
                 aboutSectionHeading,
@@ -64,14 +64,14 @@ test.describe('Homepage Smoke Test',
                 experienceSectionHeading,
                 skillsSectionHeading,
                 trainingsSectionHeading
-            } = homePage.getSectionHeadings();
+            } = homePage.getSectionHeadingsIds();
 
             const {
                 servicesSectionNavigation,
                 experienceSectionNavigation,
                 skillsSectionNavigation,
                 trainingsSectionNavigation
-            } = homePage.getNavigationElements();
+            } = homePage.getNavigationElementsIds();
 
             await test.step('On page load, verify that the About section is visible and has the correct heading', 
                 async () => {
@@ -80,5 +80,14 @@ test.describe('Homepage Smoke Test',
             });
 
     });
+
+    test.only('Sandbox', async () => {
+
+        const expectedValues = homePage.getExpectedValues()
+
+        console.log(expectedValues);
+
+
+    })
 
 })
