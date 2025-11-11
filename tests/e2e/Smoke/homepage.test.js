@@ -8,7 +8,7 @@ import { HomePage } from '../../page-objects/homepage-objects';
 // This also helps with the readability of the test report.
 
 
-test.describe('Smoke Test',
+test.describe('Homepage Smoke Test',
     {tag: '@smoke'}, () => {
 
     /** @type {HomePage} */
@@ -21,7 +21,7 @@ test.describe('Smoke Test',
 
     test('Check for correct page title', {
         annotation: [
-            { type: 'Description', description: 'Checks that we are redirected to the correct landing page by comparing the page title and url to the expected values.' }
+            { type: 'Description', description: 'Verifies that we are redirected to the correct landing page by comparing the page title and url from the expected values.' }
         ]} ,async () => {
 
         /** @type {string} */
@@ -43,6 +43,42 @@ test.describe('Smoke Test',
             expect(pageTitle).toBe(expectedPageTitle);
         });
 
-    })
+    });
+
+    test('Check the Main sections are visible', {
+        annotation: [
+            { type: 'Description', description: ''}
+        ]} , async () => {
+
+            const {
+                aboutSection,
+                servicesSection,
+                experienceSection,
+                skillsSection,
+                trainingsSection
+            } = homePage.getMainSection();
+
+            const {
+                aboutSectionHeading,
+                serviceSectionHeading,
+                experienceSectionHeading,
+                skillsSectionHeading,
+                trainingsSectionHeading
+            } = homePage.getSectionHeadings();
+
+            const {
+                servicesSectionNavigation,
+                experienceSectionNavigation,
+                skillsSectionNavigation,
+                trainingsSectionNavigation
+            } = homePage.getNavigationElements();
+
+            await test.step('On page load, verify that the About section is visible and has the correct heading', 
+                async () => {
+                    await expect(aboutSection).toBeInViewport();
+                    await expect(aboutSectionHeading).toHaveText('JV William Andal');
+            });
+
+    });
 
 })
