@@ -18,7 +18,7 @@ export class HomePage {
         }
     }
 
-    async getNavigationElements() {
+    getNavigationElements() {
         return {
             aboutSectionNavigation: this.page.getByTestId('nav-about'),
             servicesSectionNavigation: this.page.getByTestId('nav-services'),
@@ -28,7 +28,7 @@ export class HomePage {
         }
     }
 
-    async getMainSection() {
+    getMainSection() {
         return {
             aboutSection: this.page.getByTestId('section-about'),
             servicesSection: this.page.getByTestId('section-services'),
@@ -38,7 +38,7 @@ export class HomePage {
         }
     }
 
-    async getSectionHeadings() {
+    getSectionHeadings() {
         return {
             aboutSectionHeading: this.page.getByTestId('section-about-heading'),
             serviceSectionHeading: this.page.getByTestId('section-services-heading'),
