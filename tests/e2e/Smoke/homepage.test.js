@@ -64,7 +64,7 @@ test.describe('Homepage Smoke Test',
                 experienceSectionHeading,
                 skillsSectionHeading,
                 trainingsSectionHeading
-            } = homePage.getSectionHeadingsIds();
+            } = homePage.getSectionPrimaryHeadingsIds();
 
             const {
                 servicesSectionNavigation,
@@ -73,19 +73,56 @@ test.describe('Homepage Smoke Test',
                 trainingsSectionNavigation
             } = homePage.getNavigationElementsIds();
 
+            const expectedValues = homePage.getExpectedValues();
+
             await test.step('On page load, verify that the About section is visible and has the correct heading', 
                 async () => {
                     await expect(aboutSection).toBeInViewport();
-                    await expect(aboutSectionHeading).toHaveText('JV William Andal');
+                    await expect(aboutSectionHeading).toHaveText(`${expectedValues.pHeadings.aboutSection}`);
+            });
+
+            await test.step('Navigate to Services section and verify the section and heading is visible and correct',
+                async () => {
+                    await servicesSectionNavigation.click();
+                    await expect(servicesSection).toBeInViewport();
+                    await expect(serviceSectionHeading).toBeInViewport();
+                    await expect(serviceSectionHeading).toHaveText(`${expectedValues.pHeadings.servicesSection}`);
+            });
+
+            await test.step('Navigate to Experience section and verify the section and heading is visible and correct', 
+                async () => {
+                    await experienceSectionNavigation.click();
+                    await expect(experienceSection).toBeInViewport();
+                    await expect(experienceSectionHeading).toBeInViewport();
+                    await expect(experienceSectionHeading).toHaveText(`${expectedValues.pHeadings.experienceSection}`);
+            });
+
+            await test.step('Navigate to Skills section and verify the section and heading is visible and correct', 
+                async () => {
+                    await skillsSectionNavigation.click();
+                    await expect(skillsSection).toBeInViewport();
+                    await expect(skillsSectionHeading).toBeInViewport();
+                    await expect(skillsSectionHeading).toHaveText(`${expectedValues.pHeadings.skillSection}`);
+            });
+
+            // add checks for trainings section
+            await test.step('Navigate to Trainings section and verify the section and heading is visible and correct',
+                async () => {
+                    await trainingsSectionNavigation.click();
+                    await expect(trainingsSection).toBeInViewport();
+                    await expect(trainingsSectionHeading).toBeInViewport();
+                    await expect(trainingsSectionHeading).toHaveText(`${expectedValues.pHeadings.trainingsSection}`);
             });
 
     });
 
-    test.only('Sandbox', async () => {
+    test.skip('Sandbox', async () => {
 
-        const expectedValues = homePage.getExpectedValues()
+        //const expectedValues = homePage.getExpectedValues().pHeadings.aboutSection;
+        const expectedValues = homePage.getExpectedValues();
+        const testVariable = expectedValues.pHeadings.aboutSection;
 
-        console.log(expectedValues);
+        console.log(`About Section Primary Heading: ${testVariable}`);
 
 
     })

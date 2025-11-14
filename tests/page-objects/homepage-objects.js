@@ -40,7 +40,7 @@ export class HomePage {
         }
     }
 
-    getSectionHeadingsIds() {
+    getSectionPrimaryHeadingsIds() {
         return {
             aboutSectionHeading: this.page.getByTestId('section-about-heading'),
             serviceSectionHeading: this.page.getByTestId('section-services-heading'),
@@ -50,12 +50,15 @@ export class HomePage {
         }
     }
 
+    /**
+     * @returns A list of Expected Values defined from the expected-values.json
+     */
     getExpectedValues() {
         const dataPath = getPath('expected-values.json');
         const rawData = fs.readFileSync(dataPath, 'utf-8');
-        const data = JSON.parse(rawData)
+        const expectedValuesData = JSON.parse(rawData)
 
-        return data;
+        return expectedValuesData;
     };
 
     async goto() {
