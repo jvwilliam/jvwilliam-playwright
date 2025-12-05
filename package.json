@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "smoke:test" : "playwright test --grep '@smoke'",
-    "test:ui": "playwright test --ui",
-    "test:local": "cross-env ENV=local playwright test"
+    "smoke:test" : "cross-env ENV=%ENV% playwright test --grep '@smoke'",
+    "test:ui": "playwright test --ui"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { getPath } from '../utils/pathHelper';
+import { getPath } from '../utils/path-helper.js';
 import fs from 'fs';
 
 export class HomePage { 
