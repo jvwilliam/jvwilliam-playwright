@@ -160,16 +160,16 @@ test('User can log in successfully', async ({ page }) => {...});
 - Avoid hardcoding URLs; use a config file or enviroment variables.
 
 ## Git Workflow
-All feature branches should be merged to the `qa-release` branch first. Once tested, merge the `qa-release` to the main branch and publish. 
+All feature branches should be merged to the `release` branch first. Once tested, push or publish the `release` branch to the remote repository. The release branch will then be merged to the main branch. 
 
 ```
-# switch to target main branch
-git switch main
+# switch to release branch branch
+git switch [workstation]-release
 
-# merge qa-release to main
-git merge qa-release
+# merge feature-branch to release branch
+git merge feature-branch
 
 # Resolve any conflicts (if any)
-# Push the main branch to the remote tracking branch
-git push origin main
+# Publish or push the branch to the remote repository
+git push origin [workstation]-release
 ```
