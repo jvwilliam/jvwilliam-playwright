@@ -1,7 +1,7 @@
 // @ts-check
 
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../../page-objects/homepage-objects';
+import { HomePage } from '../../page-objects/home.page';
 
 test.describe('Homepage Primary Sections Visibility Tests', 
     { tag: '@smoke' }, () => {
@@ -83,6 +83,14 @@ test.describe('Homepage Primary Sections Visibility Tests',
             });
 
         });
+
+    test('Sandbox', async ({page}) => {
+        await test.step('On page load, verify that the About section is visible and has the correct heading.', async () => {
+                await expect(page.getByTestId('section-about')).toBeInViewport();
+                //await expect(aboutSectionHeading).toHaveText(`${expectedValues.pHeadings.aboutSection}`);
+        });
+
+    })
 
 
 });
