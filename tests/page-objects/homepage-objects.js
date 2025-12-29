@@ -43,7 +43,7 @@ export class HomePage {
     getSectionPrimaryHeadingsIds() {
         return {
             aboutSectionHeading: this.page.getByTestId('section-about-heading'),
-            serviceSectionHeading: this.page.getByTestId('section-services-heading'),
+            servicesSectionHeading: this.page.getByTestId('section-services-heading'),
             experienceSectionHeading: this.page.getByTestId('section-experience-primaryHeading'),
             skillsSectionHeading: this.page.getByTestId('section-skills-primaryHeading'),
             trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading')
