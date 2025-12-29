@@ -36,13 +36,6 @@ test.describe('Homepage Primary Sections Visibility Tests',
                 trainingsSectionHeading
             } = homePage.getSectionPrimaryHeadingsIds();
 
-            const {
-                servicesSectionNavigation,
-                experienceSectionNavigation,
-                skillsSectionNavigation,
-                trainingsSectionNavigation
-            } = homePage.getNavigationElementsIds();
-
             const expectedValues = homePage.getExpectedValues();
 
             await test.step('On page load, verify that the About section is visible and has the correct heading.', async () => {
@@ -51,7 +44,7 @@ test.describe('Homepage Primary Sections Visibility Tests',
             });
 
             await test.step('Navigate to Services section and verify the section Heading is visible and correct.', async () => {
-                await servicesSectionNavigation.click();
+                await homePage.goToServicesSection();
                 await servicesSection.scrollIntoViewIfNeeded();
                 await expect(servicesSection).toBeInViewport();
                 await expect(servicesSectionHeading).toBeInViewport();
@@ -59,7 +52,8 @@ test.describe('Homepage Primary Sections Visibility Tests',
             });
 
             await test.step('Navigate to Experience section and verify the section Heading is visible and correct.', async () => {
-                await experienceSectionNavigation.click();
+                //await experienceSectionNavigation.click();
+                await homePage.goToExperienceSection();
                 await experienceSection.scrollIntoViewIfNeeded();
                 await expect(experienceSection).toBeInViewport();
                 await expect(experienceSectionHeading).toBeInViewport();
@@ -67,7 +61,8 @@ test.describe('Homepage Primary Sections Visibility Tests',
             });
 
             await test.step('Navigate to Skills section and verify the section Heading is visible and correct', async () => {
-                await skillsSectionNavigation.click();
+                //await skillsSectionNavigation.click();
+                await homePage.goToSkillsSection();
                 await skillsSection.scrollIntoViewIfNeeded();
                 await expect(skillsSection).toBeInViewport();
                 await expect(skillsSectionHeading).toBeInViewport();
@@ -75,7 +70,8 @@ test.describe('Homepage Primary Sections Visibility Tests',
             });
 
             await test.step('Navigate to Trainings section and verify the section Heading is visible and correct', async () => {
-                await trainingsSectionNavigation.click();
+                //await trainingsSectionNavigation.click();
+                await homePage.goToTrainingsSection();
                 await trainingsSection.scrollIntoViewIfNeeded();
                 await expect(trainingsSection).toBeInViewport();
                 await expect(trainingsSectionHeading).toBeInViewport();

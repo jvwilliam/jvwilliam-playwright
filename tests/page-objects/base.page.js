@@ -72,5 +72,23 @@ export class BasePage {
         }
     }
 
+    // Navigation methods
+
+    async goToServicesSection() {
+        await this.getNavigationElementsIds().servicesSectionNavigation.click();
+    }
+
+    async goToExperienceSection() {
+        await this.getNavigationElementsIds().experienceSectionNavigation.click();
+    }
+
+    async goToSkillsSection() {
+        await this.getNavigationElementsIds().skillsSectionNavigation.click();
+    }
+
+    async goToTrainingsSection() {
+        await this.getNavigationElementsIds().trainingsSectionNavigation.click();
+    }
+
     
 }
