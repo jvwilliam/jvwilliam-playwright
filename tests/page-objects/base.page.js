@@ -13,6 +13,31 @@ export class BasePage {
         this.page = page;
     }
 
+    /**
+     * @returns A List of Expected Values defined from the expected-values.json
+     */
+    getExpectedValues() {
+        const dataPath = getPath('expected-values.json');
+        const rawData = fs.readFileSync(dataPath, 'utf-8');
+        const expectedValuesData = JSON.parse(rawData)
+        
+        return expectedValuesData;
+    }
+
+    async getCurrentUrl() {
+        return this.page.url();
+    }
+
+    async getPageTitle() {
+        const pageTitle = await this.page.title();
+        return pageTitle;
+    }
+
+    async getExpectedPageTitle() {
+        const expectedPageTitle = this.getExpectedValues().pageTitle;
+        return expectedPageTitle;
+    }
+
     async goto(path = '/') {
         await this.page.goto(path);
     }
@@ -47,14 +72,5 @@ export class BasePage {
         }
     }
 
-    /**
-     * @returns A List of Expected Values defined from the expected-values.json
-     */
-    getExpectedValues() {
-        const dataPath = getPath('expected-values.json');
-        const rawData = fs.readFileSync(dataPath, 'utf-8');
-        const expectedValuesData = JSON.parse(rawData)
-        
-        return expectedValuesData;
-    }
+    
 }

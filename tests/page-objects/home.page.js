@@ -1,4 +1,5 @@
 import { BasePage } from './base.page';
+import { expect } from '@playwright/test';
 
 export class HomePage extends BasePage {
     constructor(page) {
@@ -9,5 +10,12 @@ export class HomePage extends BasePage {
 
     async goto() {
         await super.goto('/');
+    }
+
+    async checkPageTitle() {
+        const pageTitle = await this.getPageTitle();
+        const expectedPageTitle = await this.getExpectedPageTitle();
+
+        expect(pageTitle).toBe(expectedPageTitle);
     }
 }
