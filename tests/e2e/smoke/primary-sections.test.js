@@ -39,16 +39,12 @@ test.describe('Homepage Primary Sections Visibility Tests',
             const expectedValues = homePage.getExpectedValues();
 
             await test.step('On page load, verify that the About section is visible and has the correct heading.', async () => {
-                await expect(aboutSection).toBeInViewport();
-                await expect(aboutSectionHeading).toHaveText(`${expectedValues.pHeadings.aboutSection}`);
+                await homePage.verifyAboutSectionComplete();
             });
 
             await test.step('Navigate to Services section and verify the section Heading is visible and correct.', async () => {
                 await homePage.goToServicesSection();
-                await servicesSection.scrollIntoViewIfNeeded();
-                await expect(servicesSection).toBeInViewport();
-                await expect(servicesSectionHeading).toBeInViewport();
-                await expect(servicesSectionHeading).toHaveText(`${expectedValues.pHeadings.servicesSection}`);
+                await homePage.verifyServicesSectionComplete();
             });
 
             await test.step('Navigate to Experience section and verify the section Heading is visible and correct.', async () => {
