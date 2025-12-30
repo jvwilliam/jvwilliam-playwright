@@ -46,14 +46,4 @@ test.describe('Homepage Primary Sections Visibility Tests',
             });
 
         });
-
-    test('Sandbox', async ({page}) => {
-        await test.step('On page load, verify that the About section is visible and has the correct heading.', async () => {
-                await expect(page.getByTestId('section-about')).toBeInViewport();
-                //await expect(aboutSectionHeading).toHaveText(`${expectedValues.pHeadings.aboutSection}`);
-        });
-
-    })
-
-
 });

@@ -29,17 +29,17 @@ test.describe('Homepage Smoke Test',
         /** @type {string} */
         let expectedPageTitle;
 
-        test.step('Get the current page title', async () => {
+        await test.step('Get the current page title', async () => {
             pageTitle = await homePage.getPageTitle();
             console.log(`Getting the current Page Title...${pageTitle}`);
         });
 
-        test.step('Get the expected page title', async () => {
+        await test.step('Get the expected page title', async () => {
             expectedPageTitle = await homePage.getExpectedPageTitle();
             console.log(`Getting the expected Page Title...${expectedPageTitle}`);
         });
 
-        test.step('Compare the current and expected values', async () => {
+        await test.step('Compare the current and expected values', async () => {
             await homePage.checkPageTitle();
         });
 
