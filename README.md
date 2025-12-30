@@ -1,15 +1,29 @@
 # Overview
+**jvwilliam-playwright** is and **end-to-end test automation framework** built with Playwright and JavaScript. It's designed to test a personal portfolio website with a focus on clean architecture, maintainability, and reusable page object patters. 
 
-# Tools & Technologies
+## Key Features ✨
+- **Page Object Model** - Centralized page objects (BasePage, HomePage) for maintainable test code.
+- **Abstract Classes** - Blueprint pattern with abstract methods that subclasses must implement.
+- **Test Fixtures** - Expected values stored in JSON for easy assertion management. 
+- **Environment Support** - Multiple environments (dev, staging, etc) via `.env` files.
+- **Cross-platform** - Uses `cross-env` for Windows/Mac/Linux compatibility.
+- **Multiple Browsers** - Tests run on Chromium, Firefox, and WebKit.
+- **HTML Reports** - Built-in Playwright HTML reporting.
+- **CI/CD Ready** - GitHub Actions integration for automated runs.
+
+## Current Test Scope
+- **Homepage Smoke Tests** - Verifies the page title, section visibility and navigation flow.
+- **Primary sections visibility** - Tests for About, Services, Experience, Skills and Trainings section.
+- **Navigation** - Validates anchor/nav link interactions.
 
 ## Tech Stack
-- Playwright (JavaScript)
-- Test Runner: Playwright Test
-- CI/CD Integration: Github Actions
-- Reporting: HTML reports
-- Browser Support: Chromium, Firefox, WebKit
-
-# Current Features (Optional)
+| Component         | Technology                            |
+|-------------------|---------------------------------------|
+| Test Framework    | Playwright Test (JavaScript)          |
+| CI/CD             | GitHub Actions                        |
+| Reporting         | Playwright HTML Reports               |
+| Browsers          | Chromium, Firefox, WebKit             |
+| Utilities         | cross-env (cross-platform env vars)   |
 
 # Setup
 After cloning the repository, run the following commands to install dependencies: 
@@ -47,7 +61,7 @@ $env:ENV="dev"; npm run tests
 
 ## Default
 ```
-#This command will execute all tests on the tests/e2e folder
+# This command will execute all tests on the tests/e2e folder
 
 npx playwright tests
 ```
@@ -173,3 +187,10 @@ git merge feature-branch
 # Publish or push the branch to the remote repository
 git push origin [workstation]-release
 ```
+
+# Release Notes:
+| Version | Date       | Changes                        |
+|---------|------------|--------------------------------|
+| 1.0.0   | 2025-12-30 | Initial release                |
+| 1.0.0   | 2025-12-25 | Added base page class          |
+| 1.0.0   | 2025-12-20 | Refactored page objects        |
