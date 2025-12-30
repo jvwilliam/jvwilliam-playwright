@@ -7,12 +7,61 @@ export class HomePage extends BasePage {
         const sections = this.getMainSectionIds();
         this.aboutSection = sections.aboutSection;
         this.servicesSection = sections.servicesSection;
+        this.experienceSection = sections.experienceSection;
+        this.skillsSection = sections.skillsSection;
+        this.trainingsSection = sections.trainingsSection;
 
         const sectionHeadings = this.getSectionPrimaryHeadingsIds();
         this.aboutSectionHeading = sectionHeadings.aboutSectionHeading;
         this.servicesSectionHeading = sectionHeadings.servicesSectionHeading;
-        //this.nav = this.locator('nav.primary');
-        //this.hero = this.locator('section-hero');
+        this.experienceSectionHeading = sectionHeadings.experienceSectionHeading;
+        this.skillsSectionHeading = sectionHeadings.skillsSectionHeading;
+        this.trainingSectionHeading = sectionHeadings.trainingsSectionHeading;
+    }
+
+    // Concrete Implementation of Abstract Navigation Methods
+
+    /**
+     * Navigate to the Services section by clicking the nav link and scrolling into view.
+     * @returns {Promise<void>}
+     */
+    async goToServicesSection() {
+        const { servicesSectionNavigation } = this.getNavigationElementsIds();
+        await servicesSectionNavigation.click();
+        await this.servicesSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Navigate to the Experience section by clicking the nav link and scrolling into view.
+     * @returns {Promise<void>}
+     */
+    async goToExperienceSection() {
+        const { experienceSectionNavigation } = this.getNavigationElementsIds();
+        await experienceSectionNavigation.click();
+        const { experienceSection } = this.getMainSectionIds();
+        await experienceSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Navigate to the Skills section by clicking the nav link and scrolling into view.
+     * @returns {Promise<void>}
+     */
+    async goToSkillsSection() {
+        const { skillsSectionNavigation } = this.getNavigationElementsIds();
+        await skillsSectionNavigation.click();
+        const { skillsSection } = this.getMainSectionIds();
+        await skillsSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Navigate to the Trainings section by clicking the nav link and scrolling into view.
+     * @returns {Promise<void>}
+     */
+    async goToTrainingsSection() {
+        const { trainingsSectionNavigation } = this.getNavigationElementsIds();
+        await trainingsSectionNavigation.click();
+        const { trainingsSection } = this.getMainSectionIds();
+        await trainingsSection.scrollIntoViewIfNeeded();
     }
 
     async goto() {
@@ -27,7 +76,6 @@ export class HomePage extends BasePage {
     }
 
     async verifySectionVisible(sectionLocator) {
-        await sectionLocator.scrollIntoViewIfNeeded();
         await expect(sectionLocator).toBeInViewport();
     }
 
@@ -50,6 +98,30 @@ export class HomePage extends BasePage {
         await this.verifySectionHeading(
             this.servicesSectionHeading,
             this.getExpectedValues().pHeadings.servicesSection
+        );
+    }
+
+    async verifyExperienceSectionComplete() {
+        await this.verifySectionVisible(this.experienceSection);
+        await this.verifySectionHeading(
+            this.experienceSectionHeading,
+            this.getExpectedValues().pHeadings.experienceSection
+        );
+    }
+
+    async verifySkillsSectionComplete() {
+        await this.verifySectionVisible(this.skillsSection);
+        await this.verifySectionHeading(
+            this.skillsSectionHeading,
+            this.getExpectedValues().pHeadings.skillsSection
+        );
+    }
+
+    async verifyTrainingsSectionComplete() {
+        await this.verifySectionVisible(this.trainingsSection);
+        await this.verifySectionHeading(
+            this.trainingSectionHeading,
+            this.getExpectedValues().pHeadings.trainingsSection
         );
     }
 }

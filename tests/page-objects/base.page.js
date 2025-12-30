@@ -72,22 +72,46 @@ export class BasePage {
         }
     }
 
-    // Navigation methods
+    // Abstract Navigation Methods - Must be implemented by subclasses
 
+    /**
+     * Navigate to the Services section.
+     * Subclasses must implement this to handle their specific navigation flow.
+     * @abstract
+     * @returns {Promise<void>}
+     */
     async goToServicesSection() {
-        await this.getNavigationElementsIds().servicesSectionNavigation.click();
+        throw new Error('goToServicesSection() must be implemented in subclass');
     }
 
+    /**
+     * Navigate to the Experience section.
+     * Subclasses must implement this to handle their specific navigation flow.
+     * @abstract
+     * @returns {Promise<void>}
+     */
     async goToExperienceSection() {
-        await this.getNavigationElementsIds().experienceSectionNavigation.click();
+        throw new Error('goToExperienceSection() must be implemented in subclass');
     }
 
+    /**
+     * Navigate to the Skills section.
+     * Subclasses must implement this to handle their specific navigation flow.
+     * @abstract
+     * @returns {Promise<void>}
+     */
     async goToSkillsSection() {
-        await this.getNavigationElementsIds().skillsSectionNavigation.click();
+        throw new Error('goToSkillsSection() must be implemented in subclass');
     }
 
+    /**
+     * Navigate to the Trainings section.
+     * Subclasses must implement this to handle their specific navigation flow.
+     * @abstract
+     * @returns {Promise<void>}
+     */
     async goToTrainingsSection() {
-        await this.getNavigationElementsIds().trainingsSectionNavigation.click();
+        throw new Error('goToTrainingsSection() must be implemented in subclass');
     }
 
     
