@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "lib": ["ES2020", "DOM"],
+        "allowJs": true,
+        "checkJs": false,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "types": ["@playwright/test", "node"]
+    },
+    "include": [
+        "playwright.config.ts",
+        "tests/**/*.ts",
+        "tests/**/*.js",
+        "page-objects/**/*.ts",
+        "utils/**/*.ts"
+    ],
+    "exclude": ["node_modules", "playwright-report", "test-results", "dist"]
+}
