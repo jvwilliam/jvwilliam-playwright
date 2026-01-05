@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 // ESM note: prefer resolving env path from process.cwd() or use import.meta.url if you need true __dirname
-const ENV = process.env.ENV ?? 'prod';
+const ENV = process.env.ENV || 'prod';
 dotenv.config({ path: path.resolve(process.cwd(), `.env.${ENV}`) })
 
 export default defineConfig({

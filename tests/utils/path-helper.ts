@@ -6,6 +6,5 @@ import path from 'path';
  * @returns absolute path to the fixture file
  */
 export function getPath(fileName: string): string {
-    //return path.resolve(__dirname, '..', 'fixtures', fileName);
     return path.resolve(process.cwd(), 'tests', 'fixtures', fileName);
 };

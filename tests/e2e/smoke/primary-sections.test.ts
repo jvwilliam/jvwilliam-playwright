@@ -1,4 +1,3 @@
-// @ts-check
 
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../../page-objects/home.page';
@@ -6,19 +5,23 @@ import { HomePage } from '../../page-objects/home.page';
 test.describe('Homepage Primary Sections Visibility Tests', 
     { tag: '@smoke' }, () => {
 
-    
-    /** @type {HomePage} */
-    let homePage;
+    let homePage: HomePage;
 
     test.beforeEach( async ({ page }) => {
         homePage = new HomePage(page);
         await homePage.goto();
     });
 
-    test('Check the Main sections are visible', {
+    test('Check the Main sections are visible', 
+    {
         annotation: [
-            { type: 'Description', description: 'Verifies that all the primary sections on the homepage are visible to the user by clicking on the navigation links.'}
-        ]}, async () => {
+            { 
+                type: 'Description', 
+                description: 'Verifies that all the primary sections on the homepage are visible to the user by clicking on the navigation links.'
+            },
+        ],
+    }, 
+    async () => {
 
             await test.step('On page load, verify that the About section is visible and has the correct heading.', async () => {
                 await homePage.verifyAboutSectionComplete();
@@ -44,6 +47,5 @@ test.describe('Homepage Primary Sections Visibility Tests',
                 await homePage.goToTrainingsSection();
                 await homePage.verifyTrainingsSectionComplete();
             });
-
-        });
+    });
 });
