@@ -1,48 +1,80 @@
-import { expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { getPath } from '../utils/path-helper';
 import fs from 'fs';
 
-/**
- * @template T
- */
-export class BasePage {
-    /**
-     * @param {import('@playwright/test').Page} page
-     */
-    constructor(page) {
+interface PHeadings {
+    aboutSection: string;
+    servicesSection: string;
+    experienceSection: string;
+    skillsSection: string;
+    trainingsSection: string;
+}
+
+interface ExpectedValues {
+    pageTitle: string;
+    contactDetails: string;
+    pHeadings: PHeadings;
+}
+
+interface NavigationElements {
+    aboutSectionNavigation: Locator;
+    servicesSectionNavigation: Locator;
+    experienceSectionNavigation: Locator;
+    skillsSectionNavigation: Locator;
+    trainingsSectionNavigation: Locator;
+}
+
+interface MainSectionIds {
+    aboutSection: Locator;
+    servicesSection: Locator;
+    experienceSection: Locator;
+    skillsSection: Locator;
+    trainingsSection: Locator;
+}
+
+interface SectionPrimaryHeadingsIds {
+    aboutSectionHeading: Locator;
+    servicesSectionHeading: Locator;
+    experienceSectionHeading: Locator;
+    skillsSectionHeading: Locator;
+    trainingsSectionHeading: Locator;
+}
+
+export abstract class BasePage {
+    protected page: Page;
+
+    constructor(page: Page) {
         this.page = page;
     }
 
     /**
      * @returns A List of Expected Values defined from the expected-values.json
      */
-    getExpectedValues() {
+    getExpectedValues(): ExpectedValues {
         const dataPath = getPath('expected-values.json');
         const rawData = fs.readFileSync(dataPath, 'utf-8');
-        const expectedValuesData = JSON.parse(rawData)
-        
-        return expectedValuesData;
+        return JSON.parse(rawData) as ExpectedValues;
     }
 
-    async getCurrentUrl() {
+    async getCurrentUrl(): Promise<string> {
         return this.page.url();
     }
 
-    async getPageTitle() {
+    async getPageTitle(): Promise<string> {
         const pageTitle = await this.page.title();
         return pageTitle;
     }
 
-    async getExpectedPageTitle() {
+    async getExpectedPageTitle(): Promise<string> {
         const expectedPageTitle = this.getExpectedValues().pageTitle;
         return expectedPageTitle;
     }
 
-    async goto(path = '/') {
+    async goto(path = '/'): Promise<void> {
         await this.page.goto(path);
     }
 
-    getNavigationElementsIds() {
+    getNavigationElementsIds(): NavigationElements {
         return {
             aboutSectionNavigation: this.page.getByTestId('nav-about'),
             servicesSectionNavigation: this.page.getByTestId('nav-services'),
@@ -52,7 +84,7 @@ export class BasePage {
         }
     }
 
-    getMainSectionIds() {
+    getMainSectionIds(): MainSectionIds {
         return {
             aboutSection: this.page.getByTestId('section-about'),
             servicesSection: this.page.getByTestId('section-services'),
@@ -62,7 +94,7 @@ export class BasePage {
         }
     }
 
-    getSectionPrimaryHeadingsIds() {
+    getSectionPrimaryHeadingsIds(): SectionPrimaryHeadingsIds {
         return {
             aboutSectionHeading: this.page.getByTestId('section-about-heading'),
             servicesSectionHeading: this.page.getByTestId('section-services-heading'),
@@ -73,46 +105,9 @@ export class BasePage {
     }
 
     // Abstract Navigation Methods - Must be implemented by subclasses
-
-    /**
-     * Navigate to the Services section.
-     * Subclasses must implement this to handle their specific navigation flow.
-     * @abstract
-     * @returns {Promise<void>}
-     */
-    async goToServicesSection() {
-        throw new Error('goToServicesSection() must be implemented in subclass');
-    }
-
-    /**
-     * Navigate to the Experience section.
-     * Subclasses must implement this to handle their specific navigation flow.
-     * @abstract
-     * @returns {Promise<void>}
-     */
-    async goToExperienceSection() {
-        throw new Error('goToExperienceSection() must be implemented in subclass');
-    }
-
-    /**
-     * Navigate to the Skills section.
-     * Subclasses must implement this to handle their specific navigation flow.
-     * @abstract
-     * @returns {Promise<void>}
-     */
-    async goToSkillsSection() {
-        throw new Error('goToSkillsSection() must be implemented in subclass');
-    }
-
-    /**
-     * Navigate to the Trainings section.
-     * Subclasses must implement this to handle their specific navigation flow.
-     * @abstract
-     * @returns {Promise<void>}
-     */
-    async goToTrainingsSection() {
-        throw new Error('goToTrainingsSection() must be implemented in subclass');
-    }
-
+    abstract goToServicesSection(): Promise<void>;
+    abstract goToExperienceSection(): Promise<void>;
+    abstract goToSkillsSection(): Promise<void>;
+    abstract goToTrainingsSection(): Promise<void>;
     
 }

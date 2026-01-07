@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "smoke:test" : "cross-env ENV=$ENV npx playwright test --grep '@smoke'",
+    "smoke:test": "cross-env ENV=$ENV npx playwright test --grep '@smoke'",
     "test:ui": "playwright test --ui",
     "report": "playwright show-report"
   },
@@ -23,8 +23,9 @@
   "homepage": "https://github.com/jvwilliam/jvwilliam-playwright#readme",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.4",
     "cross-env": "^10.1.0",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "typescript": "^5.9.3"
   }
 }

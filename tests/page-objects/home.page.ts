@@ -1,8 +1,22 @@
 import { BasePage } from './base.page';
-import { expect } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 
 export class HomePage extends BasePage {
-    constructor(page) {
+
+    // Locator fields
+    aboutSection: Locator;
+    servicesSection: Locator;
+    experienceSection: Locator;
+    skillsSection: Locator;
+    trainingsSection: Locator;
+
+    aboutSectionHeading: Locator;
+    servicesSectionHeading: Locator;
+    experienceSectionHeading: Locator;
+    skillsSectionHeading: Locator;
+    trainingsSectionHeading: Locator;
+
+    constructor(page: Page) {
         super(page);
         const sections = this.getMainSectionIds();
         this.aboutSection = sections.aboutSection;
@@ -16,7 +30,7 @@ export class HomePage extends BasePage {
         this.servicesSectionHeading = sectionHeadings.servicesSectionHeading;
         this.experienceSectionHeading = sectionHeadings.experienceSectionHeading;
         this.skillsSectionHeading = sectionHeadings.skillsSectionHeading;
-        this.trainingSectionHeading = sectionHeadings.trainingsSectionHeading;
+        this.trainingsSectionHeading = sectionHeadings.trainingsSectionHeading;
     }
 
     // Concrete Implementation of Abstract Navigation Methods
@@ -25,7 +39,7 @@ export class HomePage extends BasePage {
      * Navigate to the Services section by clicking the nav link and scrolling into view.
      * @returns {Promise<void>}
      */
-    async goToServicesSection() {
+    async goToServicesSection(): Promise<void> {
         const { servicesSectionNavigation } = this.getNavigationElementsIds();
         await servicesSectionNavigation.click();
         await this.servicesSection.scrollIntoViewIfNeeded();
@@ -35,7 +49,7 @@ export class HomePage extends BasePage {
      * Navigate to the Experience section by clicking the nav link and scrolling into view.
      * @returns {Promise<void>}
      */
-    async goToExperienceSection() {
+    async goToExperienceSection(): Promise<void> {
         const { experienceSectionNavigation } = this.getNavigationElementsIds();
         await experienceSectionNavigation.click();
         const { experienceSection } = this.getMainSectionIds();
@@ -46,7 +60,7 @@ export class HomePage extends BasePage {
      * Navigate to the Skills section by clicking the nav link and scrolling into view.
      * @returns {Promise<void>}
      */
-    async goToSkillsSection() {
+    async goToSkillsSection(): Promise<void> {
         const { skillsSectionNavigation } = this.getNavigationElementsIds();
         await skillsSectionNavigation.click();
         const { skillsSection } = this.getMainSectionIds();
@@ -57,7 +71,7 @@ export class HomePage extends BasePage {
      * Navigate to the Trainings section by clicking the nav link and scrolling into view.
      * @returns {Promise<void>}
      */
-    async goToTrainingsSection() {
+    async goToTrainingsSection(): Promise<void> {
         const { trainingsSectionNavigation } = this.getNavigationElementsIds();
         await trainingsSectionNavigation.click();
         const { trainingsSection } = this.getMainSectionIds();
@@ -75,11 +89,11 @@ export class HomePage extends BasePage {
         expect(pageTitle).toBe(expectedPageTitle);
     }
 
-    async verifySectionVisible(sectionLocator) {
+    async verifySectionVisible(sectionLocator: Locator): Promise<void> {
         await expect(sectionLocator).toBeInViewport();
     }
 
-    async verifySectionHeading(headingLocator, expectedText) {
+    async verifySectionHeading(headingLocator: Locator, expectedText: string): Promise<void> {
         await expect(headingLocator).toHaveText(expectedText);
     }
 
@@ -120,7 +134,7 @@ export class HomePage extends BasePage {
     async verifyTrainingsSectionComplete() {
         await this.verifySectionVisible(this.trainingsSection);
         await this.verifySectionHeading(
-            this.trainingSectionHeading,
+            this.trainingsSectionHeading,
             this.getExpectedValues().pHeadings.trainingsSection
         );
     }
