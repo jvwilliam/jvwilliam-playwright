@@ -194,3 +194,4 @@ git push origin [workstation]-release
 | 1.0.0   | 2025-12-30 | Initial release                |
 | 1.0.0   | 2025-12-25 | Added base page class          |
 | 1.0.0   | 2025-12-20 | Refactored page objects        |
+| 1.0.0   | 2026-01-12 | Switch to TypeScript           |
