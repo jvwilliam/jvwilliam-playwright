@@ -9,12 +9,14 @@ export class HomePage extends BasePage {
     experienceSection: Locator;
     skillsSection: Locator;
     trainingsSection: Locator;
+    ctaSection: Locator;
 
     aboutSectionHeading: Locator;
     servicesSectionHeading: Locator;
     experienceSectionHeading: Locator;
     skillsSectionHeading: Locator;
     trainingsSectionHeading: Locator;
+    ctaSectionHeading: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -24,6 +26,7 @@ export class HomePage extends BasePage {
         this.experienceSection = sections.experienceSection;
         this.skillsSection = sections.skillsSection;
         this.trainingsSection = sections.trainingsSection;
+        this.ctaSection = sections.ctaSection;
 
         const sectionHeadings = this.getSectionPrimaryHeadingsIds();
         this.aboutSectionHeading = sectionHeadings.aboutSectionHeading;
@@ -31,9 +34,20 @@ export class HomePage extends BasePage {
         this.experienceSectionHeading = sectionHeadings.experienceSectionHeading;
         this.skillsSectionHeading = sectionHeadings.skillsSectionHeading;
         this.trainingsSectionHeading = sectionHeadings.trainingsSectionHeading;
+        this.ctaSectionHeading = sectionHeadings.ctaSectionHeading;
     }
 
     // Concrete Implementation of Abstract Navigation Methods
+
+    /**
+     * Navigate to About Section by clicking the nav link and scrolling into view
+     * @returns {Promise<void>}
+     */
+    async goToAboutSection(): Promise<void> {
+        const { aboutSectionNavigation } = this.getNavigationElementsIds();
+        await aboutSectionNavigation.click();
+        await this.aboutSection.scrollIntoViewIfNeeded();
+    }
 
     /**
      * Navigate to the Services section by clicking the nav link and scrolling into view.
@@ -76,6 +90,17 @@ export class HomePage extends BasePage {
         await trainingsSectionNavigation.click();
         const { trainingsSection } = this.getMainSectionIds();
         await trainingsSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Navigate to CTA Section by clicking Services button on About section
+     * @returns {Promise<void>}
+     */
+    async goToCTASection(): Promise<void> {
+        await this.goToAboutSection();
+        const { heroCTAButton } = this.getCtaButtonIds();
+        await heroCTAButton.click();
+        await this.ctaSection.scrollIntoViewIfNeeded();
     }
 
     async goto() {
@@ -137,5 +162,12 @@ export class HomePage extends BasePage {
             this.trainingsSectionHeading,
             this.getExpectedValues().pHeadings.trainingsSection
         );
+    }
+
+    async verifyCTASectionComplete() {
+        await this.verifySectionVisible(this.ctaSection);
+        await this.verifySectionHeading(
+            this.ctaSectionHeading,
+            this.getExpectedValues().pHeadings.ctaSection);
     }
 }

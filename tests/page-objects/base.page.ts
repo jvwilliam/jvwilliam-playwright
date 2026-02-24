@@ -8,6 +8,7 @@ interface PHeadings {
     experienceSection: string;
     skillsSection: string;
     trainingsSection: string;
+    ctaSection: string;
 }
 
 interface ExpectedValues {
@@ -24,12 +25,18 @@ interface NavigationElements {
     trainingsSectionNavigation: Locator;
 }
 
+interface CTANavigationElements {
+    heroServicesButton: Locator;
+    heroCTAButton: Locator;
+}
+
 interface MainSectionIds {
     aboutSection: Locator;
     servicesSection: Locator;
     experienceSection: Locator;
     skillsSection: Locator;
     trainingsSection: Locator;
+    ctaSection: Locator;
 }
 
 interface SectionPrimaryHeadingsIds {
@@ -38,6 +45,7 @@ interface SectionPrimaryHeadingsIds {
     experienceSectionHeading: Locator;
     skillsSectionHeading: Locator;
     trainingsSectionHeading: Locator;
+    ctaSectionHeading: Locator;
 }
 
 export abstract class BasePage {
@@ -84,13 +92,21 @@ export abstract class BasePage {
         }
     }
 
+    getCtaButtonIds(): CTANavigationElements {
+        return {
+            heroServicesButton: this.page.getByTestId('hero-services-cta-button'),
+            heroCTAButton: this.page.getByTestId('hero-cta-cta-button'),
+        }
+    } 
+
     getMainSectionIds(): MainSectionIds {
         return {
             aboutSection: this.page.getByTestId('section-about'),
             servicesSection: this.page.getByTestId('section-services'),
             experienceSection: this.page.getByTestId('section-experience'),
             skillsSection: this.page.getByTestId('section-competency'),
-            trainingsSection: this.page.getByTestId('section-trainings')
+            trainingsSection: this.page.getByTestId('section-trainings'),
+            ctaSection: this.page.getByTestId('section-cta'),
         }
     }
 
@@ -100,14 +116,17 @@ export abstract class BasePage {
             servicesSectionHeading: this.page.getByTestId('section-services-heading'),
             experienceSectionHeading: this.page.getByTestId('section-experience-primaryHeading'),
             skillsSectionHeading: this.page.getByTestId('section-skills-primaryHeading'),
-            trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading')
+            trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading'),
+            ctaSectionHeading: this.page.getByTestId('section-cta-primaryHeading'),
         }
     }
 
     // Abstract Navigation Methods - Must be implemented by subclasses
+    abstract goToAboutSection(): Promise<void>;
     abstract goToServicesSection(): Promise<void>;
     abstract goToExperienceSection(): Promise<void>;
     abstract goToSkillsSection(): Promise<void>;
     abstract goToTrainingsSection(): Promise<void>;
+    abstract goToCTASection(): Promise<void>;
     
 }

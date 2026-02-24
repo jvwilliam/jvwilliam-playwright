@@ -47,5 +47,10 @@ test.describe('Homepage Primary Sections Visibility Tests',
                 await homePage.goToTrainingsSection();
                 await homePage.verifyTrainingsSectionComplete();
             });
+
+            await test.step('Navigate to CTA section', async () => {
+                await homePage.goToCTASection();
+                await homePage.verifyCTASectionComplete();
+            })
     });
 });
