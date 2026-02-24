@@ -6,7 +6,8 @@
         "servicesSection" : "Services Offered",
         "experienceSection" : "Experience",
         "skillsSection": "Competencies & Tools",
-        "trainingsSection" : "Trainings & Certifications"
+        "trainingsSection" : "Trainings & Certifications",
+        "ctaSection": "Shipping a Web App? Let's make sure it's solid!"
     }
 
 }
