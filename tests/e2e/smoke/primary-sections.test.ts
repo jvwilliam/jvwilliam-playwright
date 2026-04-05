@@ -27,9 +27,9 @@ test.describe('Homepage Primary Sections Visibility Tests',
                 await homePage.verifyAboutSectionComplete();
             });
 
-            await test.step('Navigate to Services section and verify the section Heading is visible and correct.', async () => {
-                await homePage.goToServicesSection();
-                await homePage.verifyServicesSectionComplete();
+            await test.step('Navigate to Expertise section and verify the section Heading is visible and correct.', async () => {
+                await homePage.goToExpertiseSection();
+                await homePage.verifyExpertiseSectionComplete();
             });
 
             await test.step('Navigate to Experience section and verify the section Heading is visible and correct.', async () => {

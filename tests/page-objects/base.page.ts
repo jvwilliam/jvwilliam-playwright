@@ -4,7 +4,7 @@ import fs from 'fs';
 
 interface PHeadings {
     aboutSection: string;
-    servicesSection: string;
+    expertiseSection: string;
     experienceSection: string;
     skillsSection: string;
     trainingsSection: string;
@@ -19,7 +19,7 @@ interface ExpectedValues {
 
 interface NavigationElements {
     aboutSectionNavigation: Locator;
-    servicesSectionNavigation: Locator;
+    expertiseSectionNavigation: Locator;
     experienceSectionNavigation: Locator;
     skillsSectionNavigation: Locator;
     trainingsSectionNavigation: Locator;
@@ -32,7 +32,7 @@ interface CTANavigationElements {
 
 interface MainSectionIds {
     aboutSection: Locator;
-    servicesSection: Locator;
+    expertiseSection: Locator;
     experienceSection: Locator;
     skillsSection: Locator;
     trainingsSection: Locator;
@@ -41,7 +41,7 @@ interface MainSectionIds {
 
 interface SectionPrimaryHeadingsIds {
     aboutSectionHeading: Locator;
-    servicesSectionHeading: Locator;
+    expertiseSectionHeading: Locator;
     experienceSectionHeading: Locator;
     skillsSectionHeading: Locator;
     trainingsSectionHeading: Locator;
@@ -85,7 +85,7 @@ export abstract class BasePage {
     getNavigationElementsIds(): NavigationElements {
         return {
             aboutSectionNavigation: this.page.getByTestId('nav-about'),
-            servicesSectionNavigation: this.page.getByTestId('nav-services'),
+            expertiseSectionNavigation: this.page.getByTestId('nav-expertise'),
             experienceSectionNavigation: this.page.getByTestId('nav-experience'),
             skillsSectionNavigation: this.page.getByTestId('nav-skills'),
             trainingsSectionNavigation: this.page.getByTestId('nav-trainings')
@@ -94,7 +94,7 @@ export abstract class BasePage {
 
     getCtaButtonIds(): CTANavigationElements {
         return {
-            heroServicesButton: this.page.getByTestId('hero-services-cta-button'),
+            heroServicesButton: this.page.getByTestId('hero-expertise-cta-button'),
             heroCTAButton: this.page.getByTestId('hero-cta-cta-button'),
         }
     } 
@@ -102,7 +102,7 @@ export abstract class BasePage {
     getMainSectionIds(): MainSectionIds {
         return {
             aboutSection: this.page.getByTestId('section-about'),
-            servicesSection: this.page.getByTestId('section-services'),
+            expertiseSection: this.page.getByTestId('section-expertise'),
             experienceSection: this.page.getByTestId('section-experience'),
             skillsSection: this.page.getByTestId('section-competency'),
             trainingsSection: this.page.getByTestId('section-trainings'),
@@ -113,7 +113,7 @@ export abstract class BasePage {
     getSectionPrimaryHeadingsIds(): SectionPrimaryHeadingsIds {
         return {
             aboutSectionHeading: this.page.getByTestId('section-about-heading'),
-            servicesSectionHeading: this.page.getByTestId('section-services-heading'),
+            expertiseSectionHeading: this.page.getByTestId('section-expertise-heading'),
             experienceSectionHeading: this.page.getByTestId('section-experience-primaryHeading'),
             skillsSectionHeading: this.page.getByTestId('section-skills-primaryHeading'),
             trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading'),
@@ -123,7 +123,7 @@ export abstract class BasePage {
 
     // Abstract Navigation Methods - Must be implemented by subclasses
     abstract goToAboutSection(): Promise<void>;
-    abstract goToServicesSection(): Promise<void>;
+    abstract goToExpertiseSection(): Promise<void>;
     abstract goToExperienceSection(): Promise<void>;
     abstract goToSkillsSection(): Promise<void>;
     abstract goToTrainingsSection(): Promise<void>;
