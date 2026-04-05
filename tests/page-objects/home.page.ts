@@ -5,14 +5,14 @@ export class HomePage extends BasePage {
 
     // Locator fields
     aboutSection: Locator;
-    servicesSection: Locator;
+    expertiseSection: Locator;
     experienceSection: Locator;
     skillsSection: Locator;
     trainingsSection: Locator;
     ctaSection: Locator;
 
     aboutSectionHeading: Locator;
-    servicesSectionHeading: Locator;
+    expertiseSectionHeading: Locator;
     experienceSectionHeading: Locator;
     skillsSectionHeading: Locator;
     trainingsSectionHeading: Locator;
@@ -22,7 +22,7 @@ export class HomePage extends BasePage {
         super(page);
         const sections = this.getMainSectionIds();
         this.aboutSection = sections.aboutSection;
-        this.servicesSection = sections.servicesSection;
+        this.expertiseSection = sections.expertiseSection;
         this.experienceSection = sections.experienceSection;
         this.skillsSection = sections.skillsSection;
         this.trainingsSection = sections.trainingsSection;
@@ -30,7 +30,7 @@ export class HomePage extends BasePage {
 
         const sectionHeadings = this.getSectionPrimaryHeadingsIds();
         this.aboutSectionHeading = sectionHeadings.aboutSectionHeading;
-        this.servicesSectionHeading = sectionHeadings.servicesSectionHeading;
+        this.expertiseSectionHeading = sectionHeadings.expertiseSectionHeading;
         this.experienceSectionHeading = sectionHeadings.experienceSectionHeading;
         this.skillsSectionHeading = sectionHeadings.skillsSectionHeading;
         this.trainingsSectionHeading = sectionHeadings.trainingsSectionHeading;
@@ -53,10 +53,10 @@ export class HomePage extends BasePage {
      * Navigate to the Services section by clicking the nav link and scrolling into view.
      * @returns {Promise<void>}
      */
-    async goToServicesSection(): Promise<void> {
-        const { servicesSectionNavigation } = this.getNavigationElementsIds();
-        await servicesSectionNavigation.click();
-        await this.servicesSection.scrollIntoViewIfNeeded();
+    async goToExpertiseSection(): Promise<void> {
+        const { expertiseSectionNavigation } = this.getNavigationElementsIds();
+        await expertiseSectionNavigation.click();
+        await this.expertiseSection.scrollIntoViewIfNeeded();
     }
 
     /**
@@ -132,11 +132,11 @@ export class HomePage extends BasePage {
         );
     }
 
-    async verifyServicesSectionComplete() {
-        await this.verifySectionVisible(this.servicesSection);
+    async verifyExpertiseSectionComplete() {
+        await this.verifySectionVisible(this.expertiseSection);
         await this.verifySectionHeading(
-            this.servicesSectionHeading,
-            this.getExpectedValues().pHeadings.servicesSection
+            this.expertiseSectionHeading,
+            this.getExpectedValues().pHeadings.expertiseSection
         );
     }
 
