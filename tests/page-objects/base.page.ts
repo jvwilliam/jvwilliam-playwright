@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { expect, type Page, type Locator } from '@playwright/test';
 import { getPath } from '../utils/path-helper';
 import fs from 'fs';
 
@@ -119,6 +119,14 @@ export abstract class BasePage {
             trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading'),
             ctaSectionHeading: this.page.getByTestId('section-cta-primaryHeading'),
         }
+    }
+
+    async assertElementIsVisible(locator: Locator, timeoutMs = 5000): Promise<void> {
+        await expect(locator).toBeVisible({ timeout: timeoutMs });
+    }
+
+    async isElementVisible(locator: Locator): Promise<boolean> {
+        return await locator.isVisible();
     }
 
     // Abstract Navigation Methods - Must be implemented by subclasses

@@ -45,6 +45,7 @@ export class HomePage extends BasePage {
      */
     async goToAboutSection(): Promise<void> {
         const { aboutSectionNavigation } = this.getNavigationElementsIds();
+        await this.assertElementIsVisible(aboutSectionNavigation);
         await aboutSectionNavigation.click();
         await this.aboutSection.scrollIntoViewIfNeeded();
     }
@@ -55,6 +56,7 @@ export class HomePage extends BasePage {
      */
     async goToExpertiseSection(): Promise<void> {
         const { expertiseSectionNavigation } = this.getNavigationElementsIds();
+        await this.assertElementIsVisible(expertiseSectionNavigation);
         await expertiseSectionNavigation.click();
         await this.expertiseSection.scrollIntoViewIfNeeded();
     }
@@ -65,6 +67,7 @@ export class HomePage extends BasePage {
      */
     async goToExperienceSection(): Promise<void> {
         const { experienceSectionNavigation } = this.getNavigationElementsIds();
+        await this.assertElementIsVisible(experienceSectionNavigation);
         await experienceSectionNavigation.click();
         const { experienceSection } = this.getMainSectionIds();
         await experienceSection.scrollIntoViewIfNeeded();
@@ -76,6 +79,7 @@ export class HomePage extends BasePage {
      */
     async goToSkillsSection(): Promise<void> {
         const { skillsSectionNavigation } = this.getNavigationElementsIds();
+        await this.assertElementIsVisible(skillsSectionNavigation);
         await skillsSectionNavigation.click();
         const { skillsSection } = this.getMainSectionIds();
         await skillsSection.scrollIntoViewIfNeeded();
@@ -87,6 +91,7 @@ export class HomePage extends BasePage {
      */
     async goToTrainingsSection(): Promise<void> {
         const { trainingsSectionNavigation } = this.getNavigationElementsIds();
+        await this.assertElementIsVisible(trainingsSectionNavigation);
         await trainingsSectionNavigation.click();
         const { trainingsSection } = this.getMainSectionIds();
         await trainingsSection.scrollIntoViewIfNeeded();
@@ -122,8 +127,14 @@ export class HomePage extends BasePage {
         await expect(headingLocator).toHaveText(expectedText);
     }
 
-    // Page-level assertions
+    /** Element checks */
 
+    async navigationElementState(elementLocator: Locator): Promise<boolean> {
+        return await this.isElementVisible(elementLocator);
+    }
+
+
+    /** Page-level assertions */ 
     async verifyAboutSectionComplete() {
         await this.verifySectionVisible(this.aboutSection);
         await this.verifySectionHeading(
