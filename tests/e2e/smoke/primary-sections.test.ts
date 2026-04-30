@@ -1,6 +1,6 @@
 
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../../page-objects/home.page';
+import { HomePage } from '@/pages/home.page';
 
 test.describe('Homepage Primary Sections Visibility Tests', 
     { tag: '@smoke' }, () => {

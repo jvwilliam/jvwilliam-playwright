@@ -1,6 +1,6 @@
 import { Page, Locator } from '@playwright/test';
-import { getPath } from '../utils/path-helper';
-import fs from 'fs';
+import { getPath } from '@/utils/path-helper';
+import { EXPECTED_VALUES } from '@/data/expected-values';
 
 interface PHeadings {
     aboutSection: string;
@@ -55,15 +55,6 @@ export abstract class BasePage {
         this.page = page;
     }
 
-    /**
-     * @returns A List of Expected Values defined from the expected-values.json
-     */
-    getExpectedValues(): ExpectedValues {
-        const dataPath = getPath('expected-values.json');
-        const rawData = fs.readFileSync(dataPath, 'utf-8');
-        return JSON.parse(rawData) as ExpectedValues;
-    }
-
     async getCurrentUrl(): Promise<string> {
         return this.page.url();
     }
@@ -74,7 +65,7 @@ export abstract class BasePage {
     }
 
     async getExpectedPageTitle(): Promise<string> {
-        const expectedPageTitle = this.getExpectedValues().pageTitle;
+        const expectedPageTitle = EXPECTED_VALUES.homePage.title;
         return expectedPageTitle;
     }
 
