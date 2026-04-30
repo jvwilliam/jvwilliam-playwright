@@ -1,5 +1,6 @@
 import { BasePage } from '@/pages/base.page';
 import { expect, type Locator, type Page } from '@playwright/test';
+import { EXPECTED_VALUES } from '@/data/expected-values';
 
 export class HomePage extends BasePage {
 
@@ -128,7 +129,7 @@ export class HomePage extends BasePage {
         await this.verifySectionVisible(this.aboutSection);
         await this.verifySectionHeading(
             this.aboutSectionHeading,
-            this.getExpectedValues().pHeadings.aboutSection
+            EXPECTED_VALUES.homePage.pHeadings.aboutSection
         );
     }
 
@@ -136,7 +137,7 @@ export class HomePage extends BasePage {
         await this.verifySectionVisible(this.expertiseSection);
         await this.verifySectionHeading(
             this.expertiseSectionHeading,
-            this.getExpectedValues().pHeadings.expertiseSection
+            EXPECTED_VALUES.homePage.pHeadings.expertiseSection
         );
     }
 
@@ -144,7 +145,7 @@ export class HomePage extends BasePage {
         await this.verifySectionVisible(this.experienceSection);
         await this.verifySectionHeading(
             this.experienceSectionHeading,
-            this.getExpectedValues().pHeadings.experienceSection
+            EXPECTED_VALUES.homePage.pHeadings.experienceSection
         );
     }
 
@@ -152,7 +153,7 @@ export class HomePage extends BasePage {
         await this.verifySectionVisible(this.skillsSection);
         await this.verifySectionHeading(
             this.skillsSectionHeading,
-            this.getExpectedValues().pHeadings.skillsSection
+            EXPECTED_VALUES.homePage.pHeadings.skillsSection
         );
     }
 
@@ -160,7 +161,7 @@ export class HomePage extends BasePage {
         await this.verifySectionVisible(this.trainingsSection);
         await this.verifySectionHeading(
             this.trainingsSectionHeading,
-            this.getExpectedValues().pHeadings.trainingsSection
+            EXPECTED_VALUES.homePage.pHeadings.trainingsSection
         );
     }
 
@@ -168,6 +169,6 @@ export class HomePage extends BasePage {
         await this.verifySectionVisible(this.ctaSection);
         await this.verifySectionHeading(
             this.ctaSectionHeading,
-            this.getExpectedValues().pHeadings.ctaSection);
+            EXPECTED_VALUES.homePage.pHeadings.ctaSection);
     }
 }

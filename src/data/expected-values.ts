@@ -1,4 +1,4 @@
-export const EXPECTED = {
+export const EXPECTED_VALUES = {
     homePage: {
         title: "JV William | Modern QA | Web App Testing Specialist",
         contactDetails: "contact@jvwilliam.com",
@@ -12,3 +12,5 @@ export const EXPECTED = {
         }
     }
 } as const;
+
+export type ExpectedValues = typeof EXPECTED_VALUES;
