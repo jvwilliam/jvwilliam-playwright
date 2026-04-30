@@ -1,0 +1,14 @@
+export const EXPECTED = {
+    homePage: {
+        title: "JV William | Modern QA | Web App Testing Specialist",
+        contactDetails: "contact@jvwilliam.com",
+        pHeadings: {
+            "aboutSection" : "JV William Andal",
+            "expertiseSection" : "Expertise",
+            "experienceSection" : "Experience",
+            "skillsSection": "Competencies & Tools",
+            "trainingsSection" : "Trainings & Certifications",
+            "ctaSection": "Shipping a Web App? Let's make sure it's solid!"
+        }
+    }
+} as const;
