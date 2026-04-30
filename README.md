@@ -4,7 +4,6 @@
 ## Key Features ✨
 - **Page Object Model** - Centralized page objects (BasePage, HomePage) for maintainable test code.
 - **Abstract Classes** - Blueprint pattern with abstract methods that subclasses must implement.
-- **Test Fixtures** - Expected values stored in JSON for easy assertion management. 
 - **Environment Support** - Multiple environments (dev, staging, etc) via `.env` files.
 - **Cross-platform** - Uses `cross-env` for Windows/Mac/Linux compatibility.
 - **Multiple Browsers** - Tests run on Chromium, Firefox, and WebKit.
@@ -94,26 +93,28 @@ The `--ui` will open the test runner GUI while the `--headed` will open the brow
 ```
 project-root/
 
+├── src/
+│     └── data/
+│           ├── expected-values.ts
+│     └── helpers/
+│           ├── helper-function.ts
+│     └── pages/                                # Page Objects
+│           ├── BasePage.ts
+│           ├── HomePage.ts
+│     └── utils/
+│           ├── path-helper.ts
+│ 
 ├── tests/                                      # Test files
-│     └── e2e 
-│         └── business-view 
-│              ├── ep-home.test.js
+│     └── e2e/
+│         └── smoke/
+│              ├── homepage.test.js
 │    ├── dashboard.test.js
 │
-├── pages-objects/                              # Page Objects
-│    ├── BasePage.js
-│    ├── LoginPage.js
-│    ├── DashboardPage.js
 │
-├── utils/                                      # Utilities & helpers
-│    ├── wait-utils.js
-│    ├── config-helper.js
-│
-├── selectors/                                  # Centralized selectors (optional)
-│    ├── login-selectors.js
-│    ├── dashboard-selectors.js
-│
-├── playwright.config.js  # Playwright config
+├── scripts/                                    # CI / local scripts
+├── playwright-report/
+├── tsconfig.json
+├── playwright.config.js                        # Playwright config
 └── package.json
 ```
 
@@ -196,3 +197,4 @@ git push origin [workstation]-release
 | 1.0.0   | 2025-12-20 | Refactored page objects        |
 | 1.0.0   | 2026-01-12 | Switch to TypeScript           |
 | 1.0.0   | 2026-04-05 | Update to Node16 and update test locators |
+| 1.0.0   | 2026-04-30 | Refactored project structure (Isolated tests with page objects/helpers) | 
