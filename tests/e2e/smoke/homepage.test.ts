@@ -1,6 +1,6 @@
 
 import { test } from '@playwright/test'; 
-import { HomePage } from '../../page-objects/home.page';
+import { HomePage } from '@/pages/home.page';
 
 // This is an over complication to demonstrate how we can use the test.step function to organize and document the sections of the test code. 
 // In this demonstration, each actions are wrapped in a test.step class making it easier to understand the flow and outcome of a "complex test suite".

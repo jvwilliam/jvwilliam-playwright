@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { getPath } from '../utils/path-helper';
+import { getPath } from '@/utils/path-helper';
 import fs from 'fs';
 
 interface PHeadings {
