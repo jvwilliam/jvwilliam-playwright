@@ -1,6 +1,6 @@
 export const EXPECTED_VALUES = {
     homePage: {
-        title: "JV William | Modern QA | Web App Testing Specialist",
+        title: "JV William Andal | Modern QA | Web App Testing Specialist",
         contactDetails: "contact@jvwilliam.com",
         pHeadings: {
             "aboutSection" : "JV William Andal",
