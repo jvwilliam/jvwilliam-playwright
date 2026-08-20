@@ -3,172 +3,136 @@ import { expect, type Locator, type Page } from '@playwright/test';
 import { EXPECTED_VALUES } from '@/data/expected-values';
 
 export class HomePage extends BasePage {
+  // Locator fields
+  expertiseSection: Locator;
+  ctaSection: Locator;
 
-    // Locator fields
-    aboutSection: Locator;
-    expertiseSection: Locator;
-    experienceSection: Locator;
-    skillsSection: Locator;
-    trainingsSection: Locator;
-    ctaSection: Locator;
+  heroHeading: Locator;
+  expertiseSectionHeading: Locator;
+  ctaSectionHeading: Locator;
 
-    aboutSectionHeading: Locator;
-    expertiseSectionHeading: Locator;
-    experienceSectionHeading: Locator;
-    skillsSectionHeading: Locator;
-    trainingsSectionHeading: Locator;
-    ctaSectionHeading: Locator;
+  constructor(page: Page) {
+    super(page);
+    const sections = this.getMainSectionIds();
+    this.expertiseSection = sections.expertiseSection;
+    this.ctaSection = sections.ctaSection;
 
-    constructor(page: Page) {
-        super(page);
-        const sections = this.getMainSectionIds();
-        this.aboutSection = sections.aboutSection;
-        this.expertiseSection = sections.expertiseSection;
-        this.experienceSection = sections.experienceSection;
-        this.skillsSection = sections.skillsSection;
-        this.trainingsSection = sections.trainingsSection;
-        this.ctaSection = sections.ctaSection;
+    const sectionHeadings = this.getSectionPrimaryHeadingsIds();
+    this.heroHeading = page.getByRole('heading', {
+      level: 1,
+      name: EXPECTED_VALUES.homePage.heroHeading,
+    });
+    this.expertiseSectionHeading = sectionHeadings.expertiseSectionHeading;
+    this.ctaSectionHeading = sectionHeadings.ctaSectionHeading;
+  }
 
-        const sectionHeadings = this.getSectionPrimaryHeadingsIds();
-        this.aboutSectionHeading = sectionHeadings.aboutSectionHeading;
-        this.expertiseSectionHeading = sectionHeadings.expertiseSectionHeading;
-        this.experienceSectionHeading = sectionHeadings.experienceSectionHeading;
-        this.skillsSectionHeading = sectionHeadings.skillsSectionHeading;
-        this.trainingsSectionHeading = sectionHeadings.trainingsSectionHeading;
-        this.ctaSectionHeading = sectionHeadings.ctaSectionHeading;
-    }
+  // Concrete Implementation of Abstract Navigation Methods
 
-    // Concrete Implementation of Abstract Navigation Methods
+  /**
+   * Navigate to the Services section by clicking the nav link and scrolling into view.
+   * @returns {Promise<void>}
+   */
+  async goToExpertiseSection(): Promise<void> {
+    const { expertiseSectionNavigation } = this.getNavigationElementsIds();
+    await expertiseSectionNavigation.click();
+    await this.expertiseSection.scrollIntoViewIfNeeded();
+  }
 
-    /**
-     * Navigate to About Section by clicking the nav link and scrolling into view
-     * @returns {Promise<void>}
-     */
-    async goToAboutSection(): Promise<void> {
-        const { aboutSectionNavigation } = this.getNavigationElementsIds();
-        await aboutSectionNavigation.click();
-        await this.aboutSection.scrollIntoViewIfNeeded();
-    }
+  /**
+   * Navigate to CTA Section by scrolling into view.
+   * @returns {Promise<void>}
+   */
+  async goToCTASection(): Promise<void> {
+    await this.ctaSection.scrollIntoViewIfNeeded();
+  }
 
-    /**
-     * Navigate to the Services section by clicking the nav link and scrolling into view.
-     * @returns {Promise<void>}
-     */
-    async goToExpertiseSection(): Promise<void> {
-        const { expertiseSectionNavigation } = this.getNavigationElementsIds();
-        await expertiseSectionNavigation.click();
-        await this.expertiseSection.scrollIntoViewIfNeeded();
-    }
+  async goto() {
+    await super.goto('/');
+  }
 
-    /**
-     * Navigate to the Experience section by clicking the nav link and scrolling into view.
-     * @returns {Promise<void>}
-     */
-    async goToExperienceSection(): Promise<void> {
-        const { experienceSectionNavigation } = this.getNavigationElementsIds();
-        await experienceSectionNavigation.click();
-        const { experienceSection } = this.getMainSectionIds();
-        await experienceSection.scrollIntoViewIfNeeded();
-    }
+  async checkPageTitle() {
+    const pageTitle = await this.getPageTitle();
+    const expectedPageTitle = await this.getExpectedPageTitle();
 
-    /**
-     * Navigate to the Skills section by clicking the nav link and scrolling into view.
-     * @returns {Promise<void>}
-     */
-    async goToSkillsSection(): Promise<void> {
-        const { skillsSectionNavigation } = this.getNavigationElementsIds();
-        await skillsSectionNavigation.click();
-        const { skillsSection } = this.getMainSectionIds();
-        await skillsSection.scrollIntoViewIfNeeded();
-    }
+    expect(pageTitle).toBe(expectedPageTitle);
+  }
 
-    /**
-     * Navigate to the Trainings section by clicking the nav link and scrolling into view.
-     * @returns {Promise<void>}
-     */
-    async goToTrainingsSection(): Promise<void> {
-        const { trainingsSectionNavigation } = this.getNavigationElementsIds();
-        await trainingsSectionNavigation.click();
-        const { trainingsSection } = this.getMainSectionIds();
-        await trainingsSection.scrollIntoViewIfNeeded();
-    }
+  async checkCurrentUrl() {
+    await expect(this.page).toHaveURL('/');
+  }
 
-    /**
-     * Navigate to CTA Section by clicking Services button on About section
-     * @returns {Promise<void>}
-     */
-    async goToCTASection(): Promise<void> {
-        await this.goToAboutSection();
-        const { heroCTAButton } = this.getCtaButtonIds();
-        await heroCTAButton.click();
-        await this.ctaSection.scrollIntoViewIfNeeded();
-    }
+  async verifySectionVisible(sectionLocator: Locator): Promise<void> {
+    await expect(sectionLocator).toBeInViewport();
+  }
 
-    async goto() {
-        await super.goto('/');
-    }
+  async verifySectionHeading(headingLocator: Locator, expectedText: string): Promise<void> {
+    await expect(headingLocator).toHaveText(expectedText);
+  }
 
-    async checkPageTitle() {
-        const pageTitle = await this.getPageTitle();
-        const expectedPageTitle = await this.getExpectedPageTitle();
+  // Page-level assertions
 
-        expect(pageTitle).toBe(expectedPageTitle);
-    }
+  async verifyHeroSectionComplete() {
+    const { heroTalkButton, heroExpertiseButton } = this.getCtaButtonIds();
 
-    async verifySectionVisible(sectionLocator: Locator): Promise<void> {
-        await expect(sectionLocator).toBeInViewport();
-    }
+    await expect(
+      this.page.getByRole('link', { name: EXPECTED_VALUES.homePage.brandName }),
+    ).toBeVisible();
+    await expect(this.heroHeading).toBeVisible();
+    await expect(heroTalkButton).toBeVisible();
+    await expect(heroExpertiseButton).toBeVisible();
+    await this.verifyContactLink(heroTalkButton);
+  }
 
-    async verifySectionHeading(headingLocator: Locator, expectedText: string): Promise<void> {
-        await expect(headingLocator).toHaveText(expectedText);
-    }
+  async verifyExpertiseSectionComplete() {
+    await this.verifySectionVisible(this.expertiseSection);
+    await this.verifySectionHeading(
+      this.expertiseSectionHeading,
+      EXPECTED_VALUES.homePage.pHeadings.expertiseSection,
+    );
+  }
 
-    // Page-level assertions
+  async verifyCTASectionComplete() {
+    const { ctaContactLink } = this.getCtaButtonIds();
 
-    async verifyAboutSectionComplete() {
-        await this.verifySectionVisible(this.aboutSection);
-        await this.verifySectionHeading(
-            this.aboutSectionHeading,
-            EXPECTED_VALUES.homePage.pHeadings.aboutSection
-        );
-    }
+    await this.verifySectionVisible(this.ctaSection);
+    await this.verifySectionHeading(
+      this.ctaSectionHeading,
+      EXPECTED_VALUES.homePage.pHeadings.ctaSection,
+    );
+    await expect(this.page.getByTestId('section-cta-copy')).toBeVisible();
+    await expect(ctaContactLink).toBeVisible();
+    await this.verifyContactLink(ctaContactLink);
+  }
 
-    async verifyExpertiseSectionComplete() {
-        await this.verifySectionVisible(this.expertiseSection);
-        await this.verifySectionHeading(
-            this.expertiseSectionHeading,
-            EXPECTED_VALUES.homePage.pHeadings.expertiseSection
-        );
-    }
+  async verifyNavigationComplete() {
+    const { expertiseSectionNavigation, aboutPageNavigation, contactNavigation } =
+      this.getNavigationElementsIds();
 
-    async verifyExperienceSectionComplete() {
-        await this.verifySectionVisible(this.experienceSection);
-        await this.verifySectionHeading(
-            this.experienceSectionHeading,
-            EXPECTED_VALUES.homePage.pHeadings.experienceSection
-        );
-    }
+    await expect(expertiseSectionNavigation).toBeVisible();
+    await expect(expertiseSectionNavigation).toHaveAttribute('href', '#section-expertise');
+    await expect(aboutPageNavigation).toBeVisible();
+    await expect(aboutPageNavigation).toHaveAttribute('href', '/about/');
+    await expect(contactNavigation).toBeVisible();
+    await this.verifyContactLink(contactNavigation);
+  }
 
-    async verifySkillsSectionComplete() {
-        await this.verifySectionVisible(this.skillsSection);
-        await this.verifySectionHeading(
-            this.skillsSectionHeading,
-            EXPECTED_VALUES.homePage.pHeadings.skillsSection
-        );
-    }
+  async verifyHeroExpertiseCtaNavigatesToExpertise() {
+    const { heroExpertiseButton } = this.getCtaButtonIds();
 
-    async verifyTrainingsSectionComplete() {
-        await this.verifySectionVisible(this.trainingsSection);
-        await this.verifySectionHeading(
-            this.trainingsSectionHeading,
-            EXPECTED_VALUES.homePage.pHeadings.trainingsSection
-        );
-    }
+    await heroExpertiseButton.click();
+    await expect(this.page).toHaveURL(/#section-expertise$/);
+    await this.verifyExpertiseSectionComplete();
+  }
 
-    async verifyCTASectionComplete() {
-        await this.verifySectionVisible(this.ctaSection);
-        await this.verifySectionHeading(
-            this.ctaSectionHeading,
-            EXPECTED_VALUES.homePage.pHeadings.ctaSection);
-    }
+  async verifyContactLink(contactLink: Locator) {
+    await expect(contactLink).toHaveAttribute('href', /^mailto:/);
+    await expect(contactLink).toHaveAttribute(
+      'href',
+      new RegExp(EXPECTED_VALUES.homePage.contactDetails),
+    );
+    await expect(contactLink).toHaveAttribute(
+      'href',
+      new RegExp(EXPECTED_VALUES.homePage.contactLinkSubject.replace(/ /g, '\\+')),
+    );
+  }
 }

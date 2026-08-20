@@ -1,16 +1,15 @@
 export const EXPECTED_VALUES = {
-    homePage: {
-        title: "JV William | Modern QA | Web App Testing Specialist",
-        contactDetails: "contact@jvwilliam.com",
-        pHeadings: {
-            "aboutSection" : "JV William Andal",
-            "expertiseSection" : "Expertise",
-            "experienceSection" : "Experience",
-            "skillsSection": "Competencies & Tools",
-            "trainingsSection" : "Trainings & Certifications",
-            "ctaSection": "Shipping a Web App? Let's make sure it's solid!"
-        }
-    }
+  homePage: {
+    title: 'QA Testing for Startups & Web Product Teams | JV William Andal',
+    contactDetails: 'contact@jvwilliam.com',
+    heroHeading: 'QA Testing for Small Web Product Teams',
+    brandName: 'JV William',
+    contactLinkSubject: 'QA support inquiry',
+    pHeadings: {
+      expertiseSection: 'Expertise',
+      ctaSection: 'Ship Reliable Web Apps With Practical QA Support',
+    },
+  },
 } as const;
 
 export type ExpectedValues = typeof EXPECTED_VALUES;

@@ -7,48 +7,52 @@ This repository is a Playwright end-to-end test framework for the `jvwilliam.com
 The framework uses TypeScript, Playwright Test, page objects, shared expected values, and environment-specific `.env.{ENV}` files. `playwright.config.ts` loads `BASE_URL` from the active environment file, defaulting `ENV` to `prod` when no value is provided.
 
 ## Repository Workflow
+
 The user owns and manages the Git branch workflow. Branches are read-only from the agent's perspective.
 
 ### Agents must never
 
-- Create, switch rename, merge, rebase, or delete branches. 
-- Create, move, remove, or manage Git worktrees. 
-- Checkout another branch or commit. 
+- Create, switch rename, merge, rebase, or delete branches.
+- Create, move, remove, or manage Git worktrees.
+- Checkout another branch or commit.
 - Commit changes.
 - Push changes.
-- Open or update a pull request. 
+- Open or update a pull request.
 
-The user will perform all branch changes, commits, pushes, merges, rebases, and pull-request operations. 
+The user will perform all branch changes, commits, pushes, merges, rebases, and pull-request operations.
 
 ### Before Implementation Change
-Before making any implementation change, inspect the current branch and working tree using read-only Git commands such as: 
-    
+
+Before making any implementation change, inspect the current branch and working tree using read-only Git commands such as:
+
     git branch --show-current
     git branch --short --branch
 
-The follow these rules: 
-1. If the current branch is `main` or `master`, stop before editing and ask the user to create and switch to an implementation branch. 
-2. If another branch is already checked out, continue on that branch. 
-3. Do not require a particular `implementation-branch` name. 
-4. Do not ask the user to rename an acceptable existing branch. 
-5. Do not move or attempt to move the task to another branch. 
-6. If there is not current branch, the repository is unavailable, or the branch state cannot be determined, stop before implementation and ask the user to establish and check out an implementation branch. 
-7. Inspect existing working-tree changes before editing. Preserve user changes and do not overwrite, discard, reset, clean, stash, or revert them. 
-8. If existing changes overlap the intended implementation and cannot be safely preserved, stop and ask the user how to proceed. 
+The follow these rules:
 
-Branch inspection is a safety check, not permission to modify Git state. 
+1. If the current branch is `main` or `master`, stop before editing and ask the user to create and switch to an implementation branch.
+2. If another branch is already checked out, continue on that branch.
+3. Do not require a particular `implementation-branch` name.
+4. Do not ask the user to rename an acceptable existing branch.
+5. Do not move or attempt to move the task to another branch.
+6. If there is not current branch, the repository is unavailable, or the branch state cannot be determined, stop before implementation and ask the user to establish and check out an implementation branch.
+7. Inspect existing working-tree changes before editing. Preserve user changes and do not overwrite, discard, reset, clean, stash, or revert them.
+8. If existing changes overlap the intended implementation and cannot be safely preserved, stop and ask the user how to proceed.
+
+Branch inspection is a safety check, not permission to modify Git state.
 
 ### Work that does not require an implementation branch
-The following work does not require the user to create or switch to a new branch: 
+
+The following work does not require the user to create or switch to a new branch:
+
 - Project discovery, project documentation, or feature definition.
 - Architecture analysis, decision, documentation, or review.
 - QA planning, test execution, test analysis, reporting.
-- Repository inspection and diagnostic investigation that do not modify files. 
+- Repository inspection and diagnostic investigation that do not modify files.
 
 These are activities may proceed on main, master, another branch, or with no branch checked out. Agents may create or update non-implementation artifacts such as specifications, decision records, test plans, and review reports when the user has requested them.
 
-If any of these activities expands into implementation––such as changing runtime code, tests, assets, dependencies, build configuration, or application behavior––perform the branch and working-tree first and apply the implementation rules above. 
-
+If any of these activities expands into implementation––such as changing runtime code, tests, assets, dependencies, build configuration, or application behavior––perform the branch and working-tree first and apply the implementation rules above.
 
 ## Before Changing Tests
 

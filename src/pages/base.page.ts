@@ -1,123 +1,84 @@
 import { Page, Locator } from '@playwright/test';
-import { getPath } from '@/utils/path-helper';
 import { EXPECTED_VALUES } from '@/data/expected-values';
 
-interface PHeadings {
-    aboutSection: string;
-    expertiseSection: string;
-    experienceSection: string;
-    skillsSection: string;
-    trainingsSection: string;
-    ctaSection: string;
-}
-
-interface ExpectedValues {
-    pageTitle: string;
-    contactDetails: string;
-    pHeadings: PHeadings;
-}
-
 interface NavigationElements {
-    aboutSectionNavigation: Locator;
-    expertiseSectionNavigation: Locator;
-    experienceSectionNavigation: Locator;
-    skillsSectionNavigation: Locator;
-    trainingsSectionNavigation: Locator;
+  expertiseSectionNavigation: Locator;
+  aboutPageNavigation: Locator;
+  contactNavigation: Locator;
 }
 
 interface CTANavigationElements {
-    heroServicesButton: Locator;
-    heroCTAButton: Locator;
+  heroTalkButton: Locator;
+  heroExpertiseButton: Locator;
+  ctaContactLink: Locator;
 }
 
 interface MainSectionIds {
-    aboutSection: Locator;
-    expertiseSection: Locator;
-    experienceSection: Locator;
-    skillsSection: Locator;
-    trainingsSection: Locator;
-    ctaSection: Locator;
+  expertiseSection: Locator;
+  ctaSection: Locator;
 }
 
 interface SectionPrimaryHeadingsIds {
-    aboutSectionHeading: Locator;
-    expertiseSectionHeading: Locator;
-    experienceSectionHeading: Locator;
-    skillsSectionHeading: Locator;
-    trainingsSectionHeading: Locator;
-    ctaSectionHeading: Locator;
+  expertiseSectionHeading: Locator;
+  ctaSectionHeading: Locator;
 }
 
 export abstract class BasePage {
-    protected page: Page;
+  protected page: Page;
 
-    constructor(page: Page) {
-        this.page = page;
-    }
+  constructor(page: Page) {
+    this.page = page;
+  }
 
-    async getCurrentUrl(): Promise<string> {
-        return this.page.url();
-    }
+  async getCurrentUrl(): Promise<string> {
+    return this.page.url();
+  }
 
-    async getPageTitle(): Promise<string> {
-        const pageTitle = await this.page.title();
-        return pageTitle;
-    }
+  async getPageTitle(): Promise<string> {
+    const pageTitle = await this.page.title();
+    return pageTitle;
+  }
 
-    async getExpectedPageTitle(): Promise<string> {
-        const expectedPageTitle = EXPECTED_VALUES.homePage.title;
-        return expectedPageTitle;
-    }
+  async getExpectedPageTitle(): Promise<string> {
+    const expectedPageTitle = EXPECTED_VALUES.homePage.title;
+    return expectedPageTitle;
+  }
 
-    async goto(path = '/'): Promise<void> {
-        await this.page.goto(path);
-    }
+  async goto(path = '/'): Promise<void> {
+    await this.page.goto(path);
+  }
 
-    getNavigationElementsIds(): NavigationElements {
-        return {
-            aboutSectionNavigation: this.page.getByTestId('nav-about'),
-            expertiseSectionNavigation: this.page.getByTestId('nav-expertise'),
-            experienceSectionNavigation: this.page.getByTestId('nav-experience'),
-            skillsSectionNavigation: this.page.getByTestId('nav-skills'),
-            trainingsSectionNavigation: this.page.getByTestId('nav-trainings')
-        }
-    }
+  getNavigationElementsIds(): NavigationElements {
+    return {
+      expertiseSectionNavigation: this.page.getByTestId('nav-expertise'),
+      aboutPageNavigation: this.page.getByTestId('nav-about'),
+      contactNavigation: this.page.getByTestId('nav-contact'),
+    };
+  }
 
-    getCtaButtonIds(): CTANavigationElements {
-        return {
-            heroServicesButton: this.page.getByTestId('hero-expertise-cta-button'),
-            heroCTAButton: this.page.getByTestId('hero-cta-cta-button'),
-        }
-    } 
+  getCtaButtonIds(): CTANavigationElements {
+    return {
+      heroTalkButton: this.page.getByTestId('hero-cta-talk-button'),
+      heroExpertiseButton: this.page.getByTestId('hero-expertise-cta-button'),
+      ctaContactLink: this.page.getByTestId('section-cta-contactLink'),
+    };
+  }
 
-    getMainSectionIds(): MainSectionIds {
-        return {
-            aboutSection: this.page.getByTestId('section-about'),
-            expertiseSection: this.page.getByTestId('section-expertise'),
-            experienceSection: this.page.getByTestId('section-experience'),
-            skillsSection: this.page.getByTestId('section-competency'),
-            trainingsSection: this.page.getByTestId('section-trainings'),
-            ctaSection: this.page.getByTestId('section-cta'),
-        }
-    }
+  getMainSectionIds(): MainSectionIds {
+    return {
+      expertiseSection: this.page.getByTestId('section-expertise'),
+      ctaSection: this.page.getByTestId('section-cta'),
+    };
+  }
 
-    getSectionPrimaryHeadingsIds(): SectionPrimaryHeadingsIds {
-        return {
-            aboutSectionHeading: this.page.getByTestId('section-about-heading'),
-            expertiseSectionHeading: this.page.getByTestId('section-expertise-heading'),
-            experienceSectionHeading: this.page.getByTestId('section-experience-primaryHeading'),
-            skillsSectionHeading: this.page.getByTestId('section-skills-primaryHeading'),
-            trainingsSectionHeading: this.page.getByTestId('section-trainings-primaryHeading'),
-            ctaSectionHeading: this.page.getByTestId('section-cta-primaryHeading'),
-        }
-    }
+  getSectionPrimaryHeadingsIds(): SectionPrimaryHeadingsIds {
+    return {
+      expertiseSectionHeading: this.page.getByTestId('section-expertise-heading'),
+      ctaSectionHeading: this.page.getByTestId('section-cta-primaryHeading'),
+    };
+  }
 
-    // Abstract Navigation Methods - Must be implemented by subclasses
-    abstract goToAboutSection(): Promise<void>;
-    abstract goToExpertiseSection(): Promise<void>;
-    abstract goToExperienceSection(): Promise<void>;
-    abstract goToSkillsSection(): Promise<void>;
-    abstract goToTrainingsSection(): Promise<void>;
-    abstract goToCTASection(): Promise<void>;
-    
+  // Abstract Navigation Methods - Must be implemented by subclasses
+  abstract goToExpertiseSection(): Promise<void>;
+  abstract goToCTASection(): Promise<void>;
 }

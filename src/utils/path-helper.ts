@@ -8,5 +8,5 @@ const PROJECT_ROOT = path.resolve(__dirname, '../..');
  * @returns absolute path to the fixture file
  */
 export function getPath(fileName: string): string {
-    return path.resolve(PROJECT_ROOT, 'src/data', fileName);
-};
+  return path.resolve(PROJECT_ROOT, 'src/data', fileName);
+}

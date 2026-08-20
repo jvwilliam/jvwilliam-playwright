@@ -13,3 +13,9 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Coverage
+coverage
+
+# Build output
+dist/
