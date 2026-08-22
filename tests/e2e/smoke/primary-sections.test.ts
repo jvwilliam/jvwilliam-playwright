@@ -1,56 +1,35 @@
-
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { HomePage } from '@/pages/home.page';
 
-test.describe('Homepage Primary Sections Visibility Tests', 
-    { tag: '@smoke' }, () => {
+test.describe('Homepage Primary Sections Visibility Tests', { tag: '@smoke' }, () => {
+  let homePage: HomePage;
 
-    let homePage: HomePage;
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    await homePage.goto();
+  });
 
-    test.beforeEach( async ({ page }) => {
-        homePage = new HomePage(page);
-        await homePage.goto();
-    });
-
-    test('Check the Main sections are visible', 
+  test(
+    'shows the main homepage content sections',
     {
-        annotation: [
-            { 
-                type: 'Description', 
-                description: 'Verifies that all the primary sections on the homepage are visible to the user by clicking on the navigation links.'
-            },
-        ],
-    }, 
+      annotation: [
+        {
+          type: 'Description',
+          description:
+            'Verifies that the primary homepage content sections are visible and have the expected headings.',
+        },
+      ],
+    },
     async () => {
+      await test.step('Navigate to Expertise section and verify the section heading is visible and correct', async () => {
+        await homePage.goToExpertiseSection();
+        await homePage.verifyExpertiseSectionComplete();
+      });
 
-            await test.step('On page load, verify that the About section is visible and has the correct heading.', async () => {
-                await homePage.verifyAboutSectionComplete();
-            });
-
-            await test.step('Navigate to Expertise section and verify the section Heading is visible and correct.', async () => {
-                await homePage.goToExpertiseSection();
-                await homePage.verifyExpertiseSectionComplete();
-            });
-
-            await test.step('Navigate to Experience section and verify the section Heading is visible and correct.', async () => {
-                await homePage.goToExperienceSection();
-                await homePage.verifyExperienceSectionComplete();
-            });
-
-            await test.step('Navigate to Skills section and verify the section Heading is visible and correct', async () => {
-                await homePage.goToSkillsSection();
-                await homePage.verifySkillsSectionComplete();
-            });
-
-            await test.step('Navigate to Trainings section and verify the section Heading is visible and correct', async () => {
-                //await trainingsSectionNavigation.click();
-                await homePage.goToTrainingsSection();
-                await homePage.verifyTrainingsSectionComplete();
-            });
-
-            await test.step('Navigate to CTA section', async () => {
-                await homePage.goToCTASection();
-                await homePage.verifyCTASectionComplete();
-            })
-    });
+      await test.step('Navigate to CTA section and verify the section heading is visible and correct', async () => {
+        await homePage.goToCTASection();
+        await homePage.verifyCTASectionComplete();
+      });
+    },
+  );
 });

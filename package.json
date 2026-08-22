@@ -7,7 +7,19 @@
     "test": "playwright test",
     "smoke:test": "cross-env ENV=$ENV npx playwright test --grep '@smoke'",
     "test:ui": "playwright test --ui",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,js,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json, md}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
@@ -22,10 +34,20 @@
   },
   "homepage": "https://github.com/jvwilliam/jvwilliam-playwright#readme",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.4",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
-    "typescript": "^5.9.3"
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-check-file": "^3.3.2",
+    "eslint-plugin-playwright": "^2.11.0",
+    "globals": "^17.11.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.67.0"
   }
 }

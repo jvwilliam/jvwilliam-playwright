@@ -1,26 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "ES2020",
-        "module": "Node16",
-        "moduleResolution": "Node16",
-        "lib": ["ES2020", "DOM"],
-        "allowJs": true,
-        "checkJs": false,
-        "noEmit": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "types": ["@playwright/test", "node"],
-        "paths": {
-            "@/*": ["./src/*"]
-        }
-    },
-    "include": [
-        "playwright.config.ts",
-        "src/**/*.ts",
-        "tests/**/*.ts",
-        "tests/**/*.js"   ],
-    "exclude": ["node_modules", "playwright-report", "test-results", "dist"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "lib": ["ES2020", "DOM"],
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "types": ["@playwright/test", "node"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["playwright.config.ts", "src/**/*.ts", "tests/**/*.ts", "tests/**/*.js"],
+  "exclude": ["node_modules", "playwright-report", "test-results", "dist"]
 }

@@ -1,49 +1,74 @@
-
-import { test } from '@playwright/test'; 
+import { test } from '@playwright/test';
 import { HomePage } from '@/pages/home.page';
 
-// This is an over complication to demonstrate how we can use the test.step function to organize and document the sections of the test code. 
-// In this demonstration, each actions are wrapped in a test.step class making it easier to understand the flow and outcome of a "complex test suite".
-// This also helps with the readability of the test report.
+test.describe('Homepage Smoke Test', { tag: '@smoke' }, () => {
+  let homePage: HomePage;
 
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    await homePage.goto();
+  });
 
-test.describe('Homepage Smoke Test', 
-    { tag: '@smoke' }, () => {
-
-    let homePage: HomePage; 
-
-    test.beforeEach(async ({page}) => {
-        homePage = new HomePage(page);
-        await homePage.goto();
-    });
-
-    test('Check the correct landing page is loaded.', 
-        { 
-            annotation: 
-            [
-                { 
-                    type: 'Description', 
-                    description: 'Verifies that we are redirected to the correct landing page by comparing the page title and url from the expected values.' 
-                },
-            ],
+  test(
+    'loads the homepage with the expected hero and navigation',
+    {
+      annotation: [
+        {
+          type: 'Description',
+          description:
+            'Verifies the homepage title, URL, hero content, and primary navigation are visible and correct.',
         },
-        
-        async () => {   
-            let pageTitle: string;
-            let expectedPageTitle: string;
+      ],
+    },
 
-            await test.step('Get the current page title', async () => {
-                pageTitle = await homePage.getPageTitle();
-                console.log(`Getting the current Page Title...${pageTitle}`);
-            });
+    async () => {
+      await test.step('Verify the page loaded at the expected local route', async () => {
+        await homePage.checkCurrentUrl();
+        await homePage.checkPageTitle();
+      });
 
-            await test.step('Get the expected page title', async () => {
-                expectedPageTitle = await homePage.getExpectedPageTitle();
-                console.log(`Getting the expected Page Title...${expectedPageTitle}`);
-            });
+      await test.step('Verify the hero content and calls to action are visible', async () => {
+        await homePage.verifyHeroSectionComplete();
+      });
 
-            await test.step('Compare the current and expected values', async () => {
-                await homePage.checkPageTitle();
-            });
-        });
+      await test.step('Verify the header navigation links are visible and correctly configured', async () => {
+        await homePage.verifyNavigationComplete();
+      });
+    },
+  );
+
+  test(
+    'navigates to expertise content from the hero CTA',
+    {
+      annotation: [
+        {
+          type: 'Description',
+          description:
+            'Verifies the View Expertise hero CTA updates the URL fragment and scrolls the Expertise section into view.',
+        },
+      ],
+    },
+
+    async () => {
+      await homePage.verifyHeroExpertiseCtaNavigatesToExpertise();
+    },
+  );
+
+  test(
+    'shows the final contact CTA with a valid email link',
+    {
+      annotation: [
+        {
+          type: 'Description',
+          description:
+            'Verifies the final homepage CTA is visible and exposes the expected mailto contact details.',
+        },
+      ],
+    },
+
+    async () => {
+      await homePage.goToCTASection();
+      await homePage.verifyCTASectionComplete();
+    },
+  );
 });
