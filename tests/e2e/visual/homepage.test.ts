@@ -10,7 +10,9 @@ test.describe('Homepage visual regression', { tag: '@visual' }, () => {
     },
   });
 
-  test('Shows the expected hero and navigation', async ({ page }) => {
+  test('Shows the navigatoion, expected hero, expertise section, and CTA section', async ({
+    page,
+  }) => {
     const homePage = new HomePage(page);
 
     await homePage.goto();
