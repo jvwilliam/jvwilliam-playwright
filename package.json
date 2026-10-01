@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "smoke:test": "cross-env ENV=$ENV npx playwright test --grep '@smoke'",
+    "smoke:test:local": "cross-env ENV=local npx playwright test --grep '@smoke'",
+    "smoke:test:prod": "cross-env ENV=prod npx playwright test --grep '@smoke'",
+    "visual:test:local": "cross-env ENV=local npx playwright test --grep '@visual'",
+    "visual:test:prod": "cross-env ENV=prod npx playwright test --grep '@visual'",
     "test:ui": "playwright test --ui",
     "report": "playwright show-report",
     "format": "prettier . --write",

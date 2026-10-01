@@ -13,6 +13,8 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
+  snapshotPathTemplate:
+    '{testDir}/../src/visual-regression/baseline/{testFilePath}/{arg}-{projectName}-{platform}{ext}',
   use: {
     baseURL: process.env.BASE_URL,
     headless: true,
