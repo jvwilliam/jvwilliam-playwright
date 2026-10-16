@@ -14,7 +14,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html']],
   snapshotPathTemplate:
-    '{testDir}/../src/visual-regression/baseline/{testFilePath}/{arg}-{projectName}-{platform}{ext}',
+    '{testDir}/../src/visual-regression/baseline/{testFilePath}/{arg}-{projectName}{ext}',
   use: {
     baseURL: process.env.BASE_URL,
     headless: true,
